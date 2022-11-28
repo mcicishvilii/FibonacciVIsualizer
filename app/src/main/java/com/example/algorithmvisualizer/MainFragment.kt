@@ -44,8 +44,10 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
 
     override fun listeners() {
         binding.btn.setOnClickListener {
+            val choise = binding.etSize.text.toString()
+
             viewLifecycleOwner.lifecycleScope.launch {
-                displayFibo(17)
+                displayFibo(choise)
             }
         }
     }
@@ -62,11 +64,11 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
                 )
         }
     }
-    private suspend fun displayFibo(n:Int){
+    private suspend fun displayFibo(n:String){
         var f0 = 0
         var f1 = 1
 
-        for (i in 1..n){
+        for (i in 1..n.toInt()){
             val sum = f0 + f1
             f0 = f1
             f1 = sum

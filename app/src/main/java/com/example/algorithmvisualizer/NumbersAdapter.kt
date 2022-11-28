@@ -36,7 +36,6 @@ class NumbersAdapter :
             binding.apply {
                 tvSingleNum.text = model?.number.toString()
             }
-
 //            binding.ivNewsImage.setOnClickListener {
 //                itemClickListener.invoke(model!!, absoluteAdapterPosition)
 //            }
@@ -64,6 +63,4 @@ class NewsDiffCallBack :
     ): Boolean {
         return oldItem == newItem
     }
-
-
 }
