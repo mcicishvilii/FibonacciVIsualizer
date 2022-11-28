@@ -12,6 +12,8 @@ import android.widget.TextView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.algorithmvisualizer.databinding.FragmentMainBinding
 import com.google.android.material.tabs.TabLayout
@@ -26,39 +28,52 @@ import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.util.*
 
+val TAG = "misho"
 class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::inflate) {
 
     private val mainViewModel: MainViewModel by viewModels()
+    private val myAdapter: NumbersAdapter by lazy { NumbersAdapter() }
 
-
-
+    val list = mutableListOf<Numbers>()
 
 
     override fun viewCreated() {
+        setupRecycler()
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            fibo()
-        }
     }
 
     override fun listeners() {
-
+        binding.btn.setOnClickListener {
+            viewLifecycleOwner.lifecycleScope.launch {
+                displayFibo(17)
+            }
+        }
     }
 
-    private suspend fun fibo(){
-        val n = 20  
+    private fun setupRecycler() {
+        binding.rvNumbers.apply {
+            adapter = myAdapter
+            layoutManager =
+                GridLayoutManager(
+                    requireContext(),
+                    4,
+                    LinearLayoutManager.VERTICAL,
+                    false
+                )
+        }
+    }
+    private suspend fun displayFibo(n:Int){
         var f0 = 0
         var f1 = 1
 
         for (i in 1..n){
-
             val sum = f0 + f1
             f0 = f1
             f1 = sum
             delay(500L)
-            binding.tvText.text = f1.toString()
+            list.add(Numbers(f1))
+            myAdapter.submitList(list.toList())
         }
     }
-
 
 }
