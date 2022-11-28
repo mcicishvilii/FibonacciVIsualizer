@@ -47,7 +47,14 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
             val choise = binding.etSize.text.toString()
 
             viewLifecycleOwner.lifecycleScope.launch {
-                displayFibo(choise)
+                if (list.isEmpty()){
+                    displayFibo(choise)
+                }
+                else{
+                    list.clear()
+                    displayFibo(choise)
+                }
+
             }
         }
     }
