@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.algorithmvisualizer.data.Numbers
 import com.example.algorithmvisualizer.databinding.SingleNumberLayoutBinding
 
 class NumbersAdapter :

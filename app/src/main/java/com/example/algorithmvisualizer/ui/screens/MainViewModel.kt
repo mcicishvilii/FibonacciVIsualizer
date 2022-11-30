@@ -1,4 +1,4 @@
-package com.example.algorithmvisualizer
+package com.example.algorithmvisualizer.ui.screens
 
 import androidx.lifecycle.ViewModel
 
